@@ -5,6 +5,10 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        cinzel: ['"Cinzel Decorative"', "serif"],
+        crimson: ['"Crimson Text"', "serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -13,6 +17,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+
+        // Theme color groups
         card: {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
@@ -41,9 +50,11 @@ export default {
           DEFAULT: "var(--destructive)",
           foreground: "var(--destructive-foreground)",
         },
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
+        mystical: {
+          blue: "#6d77ff",
+          purple: "#c084fc",
+          pink: "#f0abfc",
+        },
         chart: {
           "1": "var(--chart-1)",
           "2": "var(--chart-2)",
@@ -62,29 +73,45 @@ export default {
           ring: "var(--sidebar-ring)",
         },
       },
+
+      dropShadow: {
+        glow: "0 0 20px rgba(200, 150, 255, 0.6)",
+      },
+
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        sparkle: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "1" },
+        },
+        glow: {
+          from: { textShadow: "0 0 8px rgba(255, 255, 255, 0.3)" },
+          to: { textShadow: "0 0 20px rgba(200, 150, 255, 0.9)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-15px)" },
         },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        sparkle: "sparkle 2s infinite ease-in-out",
+        glow: "glow 2s ease-in-out infinite alternate",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 } satisfies Config;
