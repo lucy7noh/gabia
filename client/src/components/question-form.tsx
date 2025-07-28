@@ -122,22 +122,43 @@ export default function QuestionForm({
         )}
       </div>
 
-      <Button
-        type="submit"
-        disabled={disabled || askMutation.isPending || !question.trim()}
-        className="mystical-button w-full py-4 px-8 rounded-2xl text-white font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-mystical-400 focus:ring-opacity-50 border-none"
-      >
-        {askMutation.isPending ? (
-          <motion.span
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            🔮 마법을 부리는 중...
-          </motion.span>
-        ) : (
-          "🔮 질문하기"
-        )}
-      </Button>
+<Button
+  type="submit"
+  disabled={disabled || askMutation.isPending || !question.trim()}
+  className="
+    w-full 
+    py-4 
+    px-8 
+    rounded-full 
+    font-semibold 
+    text-lg 
+    text-white 
+    bg-gradient-to-r 
+    from-mystical-purple 
+    via-pink-400 
+    to-mystical-blue 
+    shadow-[0_0_20px_rgba(192,132,252,0.5)] 
+    hover:brightness-110 
+    hover:scale-105 
+    transition-all 
+    duration-300 
+    focus:outline-none 
+    focus:ring-4 
+    focus:ring-mystical-purple/50
+  "
+>
+  {askMutation.isPending ? (
+    <motion.span
+      animate={{ opacity: [1, 0.5, 1] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+    >
+      🔮 마법을 부리는 중...
+    </motion.span>
+  ) : (
+    "🔮 질문하기"
+  )}
+</Button>
+
     </motion.form>
   );
 }

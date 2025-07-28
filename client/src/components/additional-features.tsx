@@ -58,14 +58,27 @@ export default function AdditionalFeatures() {
           <Star className="w-6 h-6 text-white" />
         </motion.div>
         <h4 className="text-xl font-semibold text-white mb-3">즉석 운세</h4>
-        <p className="text-mystical-200 mb-4">지금 이 순간의 특별한 메시지</p>
-        <Button
-          onClick={handleRandomFortune}
-          variant="ghost"
-          className="text-mystical-300 hover:text-white transition-colors duration-300"
-        >
-          운세 뽑기 →
-        </Button>
+        <p className="text-mystical-200 mb-4 text-gray-300">지금 이 순간의 특별한 메시지</p>
+   <Button
+  onClick={handleRandomFortune}
+  className="
+    bg-mystical-purple 
+    text-white 
+    px-6 
+    py-3 
+    rounded-full 
+    shadow-md 
+    hover:bg-mystical-purple 
+    hover:shadow-lg 
+    transition 
+    duration-300 
+    border 
+    border-white/20
+  "
+>
+  운세 뽑기 버튼
+</Button>
+
       </motion.div>
     </motion.div>
   );

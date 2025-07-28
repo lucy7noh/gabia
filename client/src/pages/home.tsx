@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import MysticalOrb from "../components/mystical-orb";
 import QuestionForm from "../components/question-form";
@@ -17,8 +17,15 @@ export default function Home() {
   const [currentAnswer, setCurrentAnswer] = useState<Answer | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const answerRef = useRef<HTMLDivElement | null>(null); // ✅ ref 추가
+
   const handleAnswerReceived = (answer: Answer) => {
     setCurrentAnswer(answer);
+
+    // ✅ 답변이 도착한 후 스크롤 이동
+    setTimeout(() => {
+      answerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 400); // animation 종료 시점 고려
   };
 
   const handleAnimationStart = () => {
@@ -32,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="mystical-bg relative overflow-hidden min-h-screen">
-      {/* ⭐ 별 반짝이 배경 추가 */}
+      {/* 별 반짝이 배경 */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {[...Array(50)].map((_, i) => (
           <div
@@ -50,16 +57,16 @@ export default function Home() {
 
       <FloatingParticles />
 
-      <div className="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center relative z-10">
+      <div className="container mx-auto px-5 py-20 min-h-screen flex flex-col items-center justify-center relative z-10">
         {/* Header */}
         <motion.header
-          className="text-center mb-8"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <motion.h1
-            className="text-6xl md:text-8xl font-bold text-white tracking-wide drop-shadow-glow font-cinzel"
+            className="text-6xl md:text-8xl font-bold text-white tracking-wide drop-shadow-glow font-cinzel mb-6"
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
@@ -68,18 +75,18 @@ export default function Home() {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-mystical-200 font-light tracking-wide"
+            className="text-sm text-white md:text-2xl text-mystical-200 font-light tracking-wide"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            마법의 솜라고동이 당신의 질문에 답해드립니다
+            마법의 솜라고동이 당신의 질문에 답해드립니다!
           </motion.p>
         </motion.header>
 
         {/* Mystical Orb */}
         <motion.div
-          className="mb-12"
+          className="mb-5"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
@@ -92,7 +99,7 @@ export default function Home() {
 
         {/* Question Form */}
         <motion.div
-          className="w-full max-w-2xl mb-16"
+          className="w-full max-w-2xl mb-10"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
@@ -108,7 +115,8 @@ export default function Home() {
         {/* Answer Display */}
         {currentAnswer && (
           <motion.div
-            className="w-full max-w-2xl mb-16"
+            ref={answerRef} // ✅ ref 연결
+            className="w-full max-w-2xl mb-16 text-white"
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -135,7 +143,7 @@ export default function Home() {
           transition={{ delay: 1.2, duration: 0.8 }}
         >
           <p className="text-mystical-300 text-sm">
-            © 2025 솜라고동, 김가은 노윤선 제작 ⭐
+            © 2025 솜라고동, 김가은 노윤선 제작 ☆
           </p>
         </motion.footer>
       </div>
